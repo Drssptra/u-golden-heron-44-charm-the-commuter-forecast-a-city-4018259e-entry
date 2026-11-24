@@ -9,6 +9,14 @@ import { join } from "node:path";
 const FORECAST =
   "Brindlewick: drizzle till 9, sunshine by 10, and the 7:42 bus is only eleven minutes late — the driver waved, so you're basically royalty.";
 
+const MAX_CHARS = 140;
+if (FORECAST.length > MAX_CHARS) {
+  console.error(
+    `Forecast is ${FORECAST.length} characters, exceeding the ${MAX_CHARS}-character gate.`,
+  );
+  process.exit(1);
+}
+
 const outputDir = process.env.MAKEFUN_OUTPUT_DIR ?? "/output";
 mkdirSync(outputDir, { recursive: true });
 writeFileSync(join(outputDir, "entry.txt"), FORECAST, "utf8");
